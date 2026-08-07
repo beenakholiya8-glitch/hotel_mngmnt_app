@@ -1,0 +1,1 @@
+using HotelManagemntAPI as service from '../../srv/hotel-service';

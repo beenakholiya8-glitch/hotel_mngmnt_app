@@ -1,0 +1,16 @@
+### get data of service
+GET http://localhost:4004/odata/v4/hotel-managemnt-api/Guests
+Content-Type: application/json
+
+### create data in guest entity
+POST http://localhost:4004/odata/v4/hotel-managemnt-api/Guests
+Content-Type: application/json
+
+{
+  "firstName"      : "Beena",
+  "lastName"       : "K",
+  "email"          : "beenak@gmail.com",
+  "phone"          : "99876543212",
+  "passportOrId"   : "A1234876"
+  
+}

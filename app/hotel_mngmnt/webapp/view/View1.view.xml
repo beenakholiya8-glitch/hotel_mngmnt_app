@@ -1,0 +1,8 @@
+<mvc:View controllerName="com.hma.hotelmngmnt.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+
+    <Button id="create" text="Create Guest" press="createGuestList"></Button>
+    </Page>
+</mvc:View>
