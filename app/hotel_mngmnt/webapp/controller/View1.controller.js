@@ -10,16 +10,6 @@ sap.ui.define([
             that = this;
             model = that.getOwnerComponent().getModel();
             debugger
-            // var oUserModel = new sap.ui.model.json.JSONModel();
-            // // Hit the internal platform mapping shortcut directly via JSONModel
-            // oUserModel.loadData("/odata/v4/hotel-management-api/getUserInfo()");
-
-            // oUserModel.attachRequestCompleted(function () {
-            //     var oData = oUserModel.getData();
-            //     console.log("AppRouter User:", oData.name || oData.email);
-            // });
-
-            // this.getView().setModel(oUserModel, "currentUser");
             that._currentUserDetails();
             // Create a binding context to read data manually
             var oListBinding = model.bindList("/Guests");
@@ -35,19 +25,8 @@ sap.ui.define([
 
         },
         _currentUserDetails: function () {
-            // var oUserModel = new sap.ui.model.json.JSONModel();
-            // oUserModel.loadData("/user-api/currentUser");
-
-            // oUserModel.attachRequestCompleted(function () {
-            //     var oData = oUserModel.getData();
-            //     console.log("User email: " + oData.email);
-            //     console.log("User display name: " + oData.displayName);
-            // });
-
-            // that.getView().setModel(oUserModel, "currentUser");
             var oModel = that.getOwnerComponent().getModel(); // Assuming V4 OData Model
             var oOperation = oModel.bindContext("/getUserInfo(...)");
-
             oOperation.execute().then(function () {
                 // FIX: Request the object data asynchronously from the V4 context
                 oOperation.getBoundContext().requestObject().then(function (oUserData) {
