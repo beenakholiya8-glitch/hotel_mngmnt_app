@@ -8,12 +8,11 @@
       "authenticationType": "none",
       "destination": "ui5"
     },
-    {
-		"path": "/services/userapi",
-		"target": {
-			"type": "service",
-			"name": "userapi"
-		}
+     {
+      "source": "^/user-api/currentUser$",
+      "target": "/currentUser",
+      "service": "sap-approuter-userapi"
+    
 	},
     {
       "source": "^/test-resources/(.*)$",

@@ -10,22 +10,24 @@ sap.ui.define([
             that = this;
             model = that.getOwnerComponent().getModel();
             debugger
-            // var oUserModel = new sap.ui.model.json.JSONModel();
-            // // Hit the internal platform mapping shortcut directly via JSONModel
-            // oUserModel.loadData("/odata/v4/hotel-management-api/getUserInfo()");
+            var oUserModel = new sap.ui.model.json.JSONModel();
 
-            // oUserModel.attachRequestCompleted(function () {
-            //     var oData = oUserModel.getData();
-            //     console.log("AppRouter User:", oData.name || oData.email);
-            // });
+            // Hit the internal platform mapping shortcut directly via JSONModel
+            oUserModel.loadData("/odata/v4/hotel-managemnt-api/getUserInfo()");
 
-            // this.getView().setModel(oUserModel, "currentUser");
-            that._currentUserDetails();
+            oUserModel.attachRequestCompleted(function () {
+                var oData = oUserModel.getData();
+                console.log("AppRouter User:", oData.name || oData.email);
+            });
+
+            this.getView().setModel(oUserModel, "currentUser");
+            // that._currentUserDetails();
             // Create a binding context to read data manually
             var oListBinding = model.bindList("/Guests");
 
             oListBinding.requestContexts().then(function (aContexts) {
                 aContexts.forEach(function (oContext) {
+                    debugger
                     // that.getView().setModel(oContext.getObject(),"guest")
                     // console.log(oContext.getObject().title); 
                 });
@@ -46,12 +48,14 @@ sap.ui.define([
 
             // that.getView().setModel(oUserModel, "currentUser");
             var oModel = that.getOwnerComponent().getModel(); // Assuming V4 OData Model
-            var oOperation = oModel.bindContext("/getUserInfo(...)");
+            var oOperation = oModel.bindContext("/HotelManagemntAPI.getUserInfo(...)");
 
             oOperation.execute().then(function () {
                 // FIX: Request the object data asynchronously from the V4 context
                 oOperation.getBoundContext().requestObject().then(function (oUserData) {
-                    debugger
+                    console.log("Logged in user ID:", oUserData.id);
+
+                    // Save to your local JSON model for view data-binding
                     var oUserModel = new sap.ui.model.json.JSONModel(oUserData);
                     this.getView().setModel(oUserModel, "currentUser");
                 }.bind(this));
@@ -63,14 +67,16 @@ sap.ui.define([
         },
         createGuestList: function () {
             var payload = {
-                "ID": "",
+                "ID": "216db7e4-bcc5-4b7b-a279-5d98f9999a17",
                 "firstName": "Shreya",
                 "lastName": "Kalra",
                 "email": "kalraS12@gmail.com",
                 "phone": "1234567890",
                 "passportOrId": "A8884877",
-                "createdBy": that.getView().getModel("currentUser").getData().id,
-                "modifiedBy": that.getView().getModel("currentUser").getData().id
+                "createdAt": "",
+                "createdBy": "",
+                "modifiedAt": "",
+                "modifiedBy": ""
             }
             var oListBinding = model.bindList("/Guests");
             var oContext = oListBinding.create(payload);

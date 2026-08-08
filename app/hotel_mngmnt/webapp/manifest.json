@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/hotel-managemnt-api/",
+        "uri": "/odata/v4/hotel-management-api/",
         "type": "OData",
         "settings": {
           "annotations": [],
